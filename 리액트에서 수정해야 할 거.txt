@@ -1,0 +1,18 @@
+리액트에서 수정해야 할 거
+게시판 페이징 처리
+- 게시글 여러개 넘어가면 화면 짤림
+C:\workspace\reactbackgit\reactbackend
+
+jdbc:h2:file:C:/workspace/12_Spring/jpa/testdb
+jdbc:h2:file:C:/workspace/reactbackgit/reactbackend/testdb
+
+C:\workspace\reactbackgit\reactbackend
+
+
+{
+  "userId" : "test01",
+  "password" : "niki4520",
+  "userName" : "테스트계정",
+  "email" : "nikihwangg@naver.com",
+  "age" : 23
+}
