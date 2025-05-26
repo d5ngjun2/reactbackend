@@ -71,17 +71,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional(readOnly = true) // 이 메서드는 읽기 전용으로 변경
+    @Transactional
     public BoardDto.Response getBoardById(Long id) {
 
-        incrementBoardViews(id); // 이 메서드가 새로운 트랜잭션으로 조회수 증가를 처리하고 즉시 커밋합니다.
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. 게시글 번호: " + id));
-
-        System.out.println("--- BoardServiceImpl: getBoardById 디버깅 시작 ---");
-        System.out.println("조회된 Board 번호: " + board.getBoardNo());
-        System.out.println("조회된 Board 제목: " + board.getBoardTitle());
-        System.out.println("--- BoardServiceImpl: getBoardById 디버깅 끝 ---");
 
         return BoardDto.Response.of(board);
     }
@@ -94,21 +88,14 @@ public class BoardServiceImpl implements BoardService {
         board.updateContent(boardUpdateDto.getBoardTitle(), boardUpdateDto.getBoardContent());
     }
 
-    // ⭐⭐ 조회수 증가만을 위한 별도의 트랜잭션 메서드 ⭐⭐
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW) // 새로운 트랜잭션을 시작하여 즉시 커밋
-    public void incrementBoardViews(Long boardId) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. 게시글 번호: " + boardId));
-
-        // views 필드가 null일 경우 0으로 초기화
-        Integer currentViews = board.getViews();
-        if (currentViews == null) {
-            currentViews = 0;
-        }
-        board.setViews(currentViews + 1); // 조회수 증가
-
-       
+    @Transactional
+    public void increaseViews(Long id) {
+       int updateCount = boardRepository.incrementViews(id);
+        System.out.println("increaseViews가 잘 실행중이야 : " + updateCount);
+       if (updateCount == 0) {
+           throw new IllegalArgumentException("게시글이 존재하지 않습니다. 게시글 번호 : " + id);
+       }
     }
 
 

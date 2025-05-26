@@ -29,8 +29,7 @@ public class BoardDto {
                     .boardContent(this.content)
                     .enrollDate(enrollDateTime)
                     .status(CommonEnums.Status.Y)
-                    // TODO: writerName 또는 member 연관관계 설정 필요 (Board 엔티티 toEntity()에서 처리)
-                    // 현재 create 요청 DTO에 member 정보가 없으므로 추후 추가 필요
+                    .views(0)
                     .build();
         }
     }

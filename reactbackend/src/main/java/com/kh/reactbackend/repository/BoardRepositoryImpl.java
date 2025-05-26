@@ -38,4 +38,12 @@ public class BoardRepositoryImpl implements BoardRepository {
         Board board = em.find(Board.class, id);
         return Optional.ofNullable(board);
     }
+
+    @Override
+    public int incrementViews(Long id) {
+        String jpql = "UPDATE Board b SET b.views = COALESCE(b.views, 0) + 1 WHERE b.boardNo = :id";
+        return em.createQuery(jpql)
+                .setParameter("id", id)
+                .executeUpdate(); // 업데이트된 행의 수를 반환
+    }
 }

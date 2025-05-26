@@ -60,7 +60,7 @@ public class Board {
     }
 
     @Column(name = "views", nullable = false)
-    private Integer views;
+    private Integer views = 0;
 
     public void setViews(int views) {
         this.views = views;

@@ -46,6 +46,12 @@ public class BoardController {
         return ResponseEntity.ok(board);
     }
 
+    @PatchMapping("/{id}/views")
+    public ResponseEntity<String> increaseViews(@PathVariable("id") Long id){
+        boardService.increaseViews(id);
+        return ResponseEntity.ok("조회수가 증가 되었습니다.");
+    }
+
     @PatchMapping("/{id}") // 게시글 수정 (PATCH /api/board/{id})
     public ResponseEntity<String> updateBoard(@PathVariable("id") Long id,
                                               @RequestBody BoardDto.Update boardUpdateDto) {

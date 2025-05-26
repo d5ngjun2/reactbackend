@@ -18,5 +18,5 @@ public interface BoardService {
 
     void updateBoard(Long id, BoardDto.Update boardUpdateDto);
 
-    void incrementBoardViews(Long boardId);
+    void increaseViews(Long id);
 }

@@ -13,4 +13,7 @@ public interface BoardRepository {
     void deleteBoard(Long id);
 
     Optional<Board> findById(Long id);
+
+    int incrementViews(Long id);
+
 }
