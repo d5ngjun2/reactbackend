@@ -37,14 +37,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteMember(String userId) {
-        Member member = memberRepository.findById(userId)
+        Member member = memberRepository.findByUserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         memberRepository.delete(member);
     }
 
     @Override
+    @Transactional
     public MemberDto.Response updateMember(String userId, MemberDto.Update updateDto) {
-        Member member = memberRepository.findById(userId)
+        Member member = memberRepository.findByUserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
         member.updateMemberInfo(

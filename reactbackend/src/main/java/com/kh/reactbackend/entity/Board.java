@@ -72,7 +72,6 @@ public class Board {
         this.views++;
     }
 
-    // ⭐⭐⭐ 게시글 제목과 내용을 변경하는 전용 메서드 추가 ⭐⭐⭐
     public void updateContent(String boardTitle, String boardContent) {
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
